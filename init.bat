@@ -1,5 +1,6 @@
 @echo off
 
+chcp 65001 > nul
 set "LETHAL_COMPANY_PATH=C:\Lethal Company"
 set "REPOSITORY_URL=https://github.com/Just-Duleys-Nation/lethal-company-mods.git"
 
@@ -17,15 +18,19 @@ if not exist "%LETHAL_COMPANY_PATH%\BepInEx" (
 
 cd /d %LETHAL_COMPANY_PATH%\BepInEx
 
-git --git-dir="%LETHAL_COMPANY_PATH%/BepInEx/plugins/.git" --work-tree "%LETHAL_COMPANY_PATH%/BepInEx/plugins" remote -v | find "%REPOSITORY_URL%" > nul
+git --git-dir="%LETHAL_COMPANY_PATH%/BepInEx/plugins/.git"^
+    --work-tree "%LETHAL_COMPANY_PATH%/BepInEx/plugins"^
+    remote -v | find "%REPOSITORY_URL%" > nul
 if errorLevel 1 (
     rmdir /s /q "plugins"
     git clone %REPOSITORY_URL% "plugins"
+    echo [32m√ Mods installed successfully[0m
 ) else (
     cd "plugins"
     git pull origin main
+    echo [32m√ Mods updated successfully[0m
 )
 
-echo DONE: Mods installed successfully.
+chcp 850 > nul
 cd /d %~dp0
 pause
