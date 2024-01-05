@@ -2,7 +2,7 @@
 
 chcp 65001 > nul
 set "LETHAL_COMPANY_PATH=C:\Lethal Company"
-set "REPOSITORY_URL=https://github.com/Just-Duleys-Nation/lethal-company-mods.git"
+set "REPOSITORY_URL=https://github.com/Just-Duleys-Devs/lethal-company-mods.git"
 
 :CHECK_PATH
 if not exist "%LETHAL_COMPANY_PATH%" (
