@@ -13,22 +13,23 @@ if not exist "%LETHAL_COMPANY_PATH%" (
 
 if not exist "%LETHAL_COMPANY_PATH%\BepInEx" (
     echo Error: The script requires BepInEx to be installed.
-    exit /b 1
+    pause
+    exit /b
 )
 
-cd /d %LETHAL_COMPANY_PATH%\BepInEx
+cd /d %LETHAL_COMPANY_PATH%
 
-git --git-dir="%LETHAL_COMPANY_PATH%/BepInEx/plugins/.git"^
-    --work-tree "%LETHAL_COMPANY_PATH%/BepInEx/plugins"^
+git --git-dir="%LETHAL_COMPANY_PATH%\BepInEx\.git"^
+    --work-tree "%LETHAL_COMPANY_PATH%/BepInEx"^
     remote -v | find "%REPOSITORY_URL%" > nul
 if errorLevel 1 (
-    rmdir /s /q "plugins"
-    git clone %REPOSITORY_URL% "plugins"
-    echo [32m√ Mods installed successfully[0m
+    rmdir /s /q "BepInEx"
+    git clone %REPOSITORY_URL% "BepInEx"
+    echo [32m√ BepInEx installed successfully[0m
 ) else (
-    cd "plugins"
+    cd "BepInEx"
     git pull origin main
-    echo [32m√ Mods updated successfully[0m
+    echo [32m√ BepInEx updated successfully[0m
 )
 
 chcp 850 > nul
